@@ -25,4 +25,4 @@ DATA_RAW = os.path.join(BASE_DIR, "data", "raw")
 DATA_PROCESSED = os.path.join(BASE_DIR, "data", "processed")
 
 # Example CSV path
-EV_CSV = os.path.join(DATA_RAW, "Electric_Vehicle_Population_Data.csv")
+AMAZON_SALES_CSV = os.path.join(DATA_RAW, "amazon_sales_dataset.csv")
