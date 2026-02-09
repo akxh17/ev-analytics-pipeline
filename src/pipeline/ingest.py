@@ -1,7 +1,7 @@
 import pandas as pd
 from sqlalchemy import create_engine
 
-from src.config.settings import EV_CSV, DATABASE_URL
+from src.config.settings import AMAZON_SALES_CSV, DATABASE_URL
 
 
 def ingest_raw_data():
@@ -11,22 +11,18 @@ def ingest_raw_data():
 
     # Read CSV
     print("Reading CSV file...")
-    df = pd.read_csv(EV_CSV)
-    print(f"Raw data shape: {df.shape}")
+    df = pd.read_csv(AMAZON_SALES_CSV)
+    print(f"Rows: {len(df)} | Columns: {len(df.columns)}")
+    print("Columns:", list(df.columns))
 
     # Create DB engine
     engine = create_engine(DATABASE_URL)
 
     # Write to database
-    print("Writing raw data to database (table: ev_raw)...")
-    df.to_sql(
-        "ev_raw",
-        engine,
-        if_exists="replace",
-        index=False
-    )
+    print("🛢️ Writing raw data to database (amazon_sales_raw)...")
+    df.to_sql("amazon_sales_raw",engine,if_exists="replace",index=False)
 
-    print("✅ Raw table written successfully: ev_raw")
+    print("✅ Raw ingestion completed: amazon_sales_raw")
 
 
 if __name__ == "__main__":
